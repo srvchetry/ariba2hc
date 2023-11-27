@@ -62,17 +62,10 @@ function handleResponse(responseText) {
   // Compare the new data with the existing data to detect changes
   if (data !== responseText) {
     console.log("Data has changed:", responseText);
-    // Update UI or perform other actions based on the changes
-
-    // Optionally, trigger additional logic or events to handle CDC
   }
 
   // Update the stored data for the next comparison
   data = responseText;
 }
-
-// Poll the API every 5 seconds (adjust as needed)
 setInterval(fetchData, 5000);
-
-// Initial fetch when the script is loaded
 fetchData();
