@@ -4,13 +4,17 @@ version: 1.0.0
 description: "A simple CAP project."
 parameters:
   enable-parallel-deployments: true
+
+
 build-parameters:
   before-all:
     - builder: custom
       commands:
         - npx cds build --production
+
+
 modules:
-  - name: ariba2hc-srv
+  - name: ariba2hc-srv #service module
     type: nodejs
     path: gen/srv
     parameters:
@@ -22,18 +26,19 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: ariba2hc-db
+      - name: ariba2hc-hdi
 
-  - name: ariba2hc-db-deployer
+  - name: ariba2hc-deployer # db module
     type: hdb
     path: gen/db
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: ariba2hc-db
+      - name: ariba2hc-hdi
+
 
 resources:
-  - name: ariba2hc-db
+  - name: ariba2hc-hdi
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
