@@ -3,21 +3,25 @@
 const { default: cds } = require('@sap/cds');
 const XMLHttpRequest = require('xhr2');
 
-// API end-point deifintion
-const apiUrl = 'https://sandbox.api.sap.com/ariba/api/purchase-orders/v1/sandbox/orders';
+var data = null;
 
-// Create a new XHR object
-const xhr = new XMLHttpRequest();
+function fetchData() {
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = false;
 
-// Set up the request
-xhr.open('GET', apiUrl, true);
-//Add request headers
-xhr.setRequestHeader("X-ARIBA-NETWORK-ID", "AN02000000280"); // ANID from step 1
-xhr.setRequestHeader("APIKey", "dMqII3LaXJ383kLD6qrzASvqpi6TlgMa"); // API Key from step 1
-xhr.setRequestHeader("DataServiceVersion", "2.0");
-xhr.setRequestHeader("Accept", "application/json");
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === this.DONE) {
+      handleResponse(this.responseText);
+    }
+  });
 
-// Handle the response
+  xhr.open("GET", "https://sandbox.api.sap.com/ariba/api/purchase-orders/v1/sandbox/orders");
+  xhr.setRequestHeader("X-ARIBA-NETWORK-ID", "AN02000000280");
+  xhr.setRequestHeader("APIKey", "dMqII3LaXJ383kLD6qrzASvqpi6TlgMa");
+  xhr.setRequestHeader("DataServiceVersion", "2.0");
+  xhr.setRequestHeader("Accept", "application/json");
+
+  // Handle the response
 xhr.onload = async function () {
   if (xhr.status === 200) {
     const service = await cds.connect.to("CatalogService");
@@ -51,4 +55,24 @@ xhr.onerror = function () {
   console.error('Error making API request');
 };
 // Send the request
-xhr.send();
+xhr.send(data);
+}
+
+function handleResponse(responseText) {
+  // Compare the new data with the existing data to detect changes
+  if (data !== responseText) {
+    console.log("Data has changed:", responseText);
+    // Update UI or perform other actions based on the changes
+
+    // Optionally, trigger additional logic or events to handle CDC
+  }
+
+  // Update the stored data for the next comparison
+  data = responseText;
+}
+
+// Poll the API every 5 seconds (adjust as needed)
+setInterval(fetchData, 5000);
+
+// Initial fetch when the script is loaded
+fetchData();
