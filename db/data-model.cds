@@ -7,3 +7,8 @@ entity Orders {
   supplierName :  String(500);
 }
   
+entity Items {
+  key documentNumber  : String(50);
+  quantity  : Double;
+  agreementDate :  String(500);
+}
