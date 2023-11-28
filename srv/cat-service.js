@@ -1,4 +1,4 @@
-// 
+// Code sample from API documentation was used for this use case
 
 const { default: cds } = require('@sap/cds');
 const XMLHttpRequest = require('xhr2');
@@ -64,6 +64,7 @@ function mapHeaderAttributes(item) {
     customerName: item.customerName,
     supplierName: item.supplierName,
     documentNumber: item.documentNumber,
+    poAmount: item.poAmount.amount,
   };
 }
 
@@ -71,7 +72,6 @@ function mapItemAttributes(item) {
   return {
     documentNumber: item.documentNumber,
     quantity: item.quantity,
-    agreementDate: item.agreementDate,
   };
 }
 
