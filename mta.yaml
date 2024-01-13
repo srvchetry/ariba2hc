@@ -10,7 +10,7 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npx cds build --production
+        - cds build
 
 
 modules:
@@ -25,6 +25,7 @@ modules:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
           srv-url: ${default-url}
+          authentication-method: none
     requires:
       - name: ariba2hc-hdi
 

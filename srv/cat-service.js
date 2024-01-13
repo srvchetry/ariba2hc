@@ -2,6 +2,10 @@
 
 const { default: cds } = require('@sap/cds');
 const XMLHttpRequest = require('xhr2');
+const passport = require('passport');
+const xssec = require('@sap/xssec');
+const xsenv = require('@sap/xsenv');
+
 
 var data = null;
 
