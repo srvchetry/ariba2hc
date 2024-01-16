@@ -1,25 +1,18 @@
 # Getting Started
 
-Welcome to your new project.
+This is the scenario A implementation where HC side car is used for persistency.
 
-It contains these folders and files, following our recommended project layout:
+# Configuration
+Open Terminal in Business Application Studio and run npm i
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`package.json` | project metadata and configuration
-`readme.md` | this getting started guide
+# Build
+Open Terminal and run cds build
 
+# Deploy for local testing
 
-## Next Steps
+Open Terminal and run cds deploy, followed by cds watch --profile hybrid
 
-- Open a new terminal and run `cds watch` 
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
+# Deploy as an application in BTP
 
-
-## Learn More
-
-Learn more at https://cap.cloud.sap/docs/get-started/.
+Open Terminal and create a .mtar file by running mbt build.
+Right click on the mtar file and choose "Deploy MTA Archive" alternatively run command cf deploy <path-to-mtar-file>
