@@ -21,7 +21,7 @@ async function fetchData(apiUrl, serviceName, entityName, mapAttributes) {
 
   xhr.open("GET", apiUrl);
   xhr.setRequestHeader("X-ARIBA-NETWORK-ID", "AN02000000280");
-  xhr.setRequestHeader("APIKey", "dMqII3LaXJ383kLD6qrzASvqpi6TlgMa");
+  xhr.setRequestHeader("APIKey", "");
   xhr.setRequestHeader("DataServiceVersion", "2.0");
   xhr.setRequestHeader("Accept", "application/json");
 
